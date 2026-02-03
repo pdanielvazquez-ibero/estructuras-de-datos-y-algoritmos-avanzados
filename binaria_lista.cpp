@@ -13,14 +13,15 @@ void insertarFinal(Nodo *&cabeza, int valor);
 void mostrarLista(Nodo *cabeza);
 
 int main(){
-    int buscado = 60;
+    int buscado = 56;
     Nodo* lista = nullptr;
-    insertarFinal(lista, 3);
-    insertarFinal(lista, 10);
-    insertarFinal(lista, 19);
-    insertarFinal(lista, 31);
+    insertarFinal(lista, 2);
+    insertarFinal(lista, 9);
+    insertarFinal(lista, 15);
+    insertarFinal(lista, 22);
+    insertarFinal(lista, 30);
     insertarFinal(lista, 56);
-    insertarFinal(lista, 80);
+    insertarFinal(lista, 84);
     mostrarLista(lista);
     cout << "Buscando: " << buscado << endl;
     Nodo* resultado = busquedaBinaria(lista, buscado);
@@ -32,7 +33,7 @@ int main(){
     return 0;
 }
 
-Nodo* mitad(Nodo* inicio, Nodo* final) {
+Nodo* buscaMitad(Nodo* inicio, Nodo* final) {
     if (inicio == nullptr) return nullptr;
 
     Nodo* lento = inicio;
@@ -51,21 +52,21 @@ Nodo* busquedaBinaria(Nodo* cabeza, int buscado) {
     Nodo* final = nullptr;
 
     while (inicio != final) {
-        Nodo* enMedio = mitad(inicio, final);
+        Nodo* mitad = buscaMitad(inicio, final);
 
-        if (enMedio == nullptr)
+        if (mitad == nullptr)
             return nullptr;
 
-        if (enMedio->dato == buscado) {
-            return enMedio; // encontrado
+        if (mitad->dato == buscado) {
+            return mitad; // encontrado
         }
-        else if (enMedio->dato < buscado) {
+        else if (mitad->dato < buscado) {
             // buscar en la mitad derecha
-            inicio = enMedio->siguiente;
+            inicio = mitad->siguiente;
         }
         else {
             // buscar en la mitad izquierda
-            final = enMedio;
+            final = mitad;
         }
     }
 
